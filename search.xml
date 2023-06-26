@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>其他</title>
+      <title>免费UI资源网站</title>
       <link href="2023/06/25/other/2023-06-25-free-ui-resource/"/>
       <url>2023/06/25/other/2023-06-25-free-ui-resource/</url>
       
@@ -269,9 +269,9 @@
       
         <tags>
             
-            <tag> Html </tag>
-            
             <tag> 教程 </tag>
+            
+            <tag> Html </tag>
             
             <tag> 页面访问统计 </tag>
             
@@ -298,9 +298,9 @@
       
         <tags>
             
-            <tag> Html </tag>
-            
             <tag> 教程 </tag>
+            
+            <tag> Html </tag>
             
             <tag> 网页 </tag>
             
@@ -316,6 +316,35 @@
       <url>2020/12/30/linux/2020-12-30-linux-tar/</url>
       
         <content type="html"><![CDATA[<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>以下为五个独立的命令，解压缩时只能使用其中一个</p><blockquote><p>-c: 建立压缩档案<br>-x：解压<br>-t：查看内容<br>-r：象牙所闻搭建末尾追加文件<br>-u：更新原压缩包中的文件</p></blockquote><p>以下参数根据需要在解压缩时可选</p><blockquote><p>-z：有gzip属性的<br>-j：有bz2属性的<br>-Z：有compress属性的<br>-v：显示所有进程<br>-O：将文件解开到标准输出</p></blockquote><p>下面的参数-f是必须的</p><blockquote><p>-f:使用档案名字，切记，这个参数是u子厚一个参数，后面只能接档案名</p></blockquote><pre class="line-numbers language-none"><code class="language-none"># tar -cf all.tar *.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条命令是将多有.jpg的文件打包成一个名为all.tar的包，-c是表示产生新的包，-f指定包的文件名</p><pre class="line-numbers language-none"><code class="language-none">#tar -rf all.tar *.gif<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条命令是将所有的.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思</p><pre class="line-numbers language-none"><code class="language-none">#tar -uf all.tar logo.gif<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条命令是更新原来tar包all.tar中的logo.gif文件，-u表示更新文件</p><pre class="line-numbers language-none"><code class="language-none">#tar -tf all.tar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条命令是列出all.tar包中所有文件，-t是列出文件的的意思</p><pre class="line-numbers language-none"><code class="language-none">#tar -xf all.tar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条命令是解出all.tar中又有文件，-t是解开的意思</p><h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><p><code>tar -cvf jpg.tar *.jpg</code> //将目录所有的jpg文件打包成jpg.tar<br><code>tar -czf jpg.tar.gz *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz<br><code>tar -cjf jpg.tar.bz2 *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2<br><code>tar -cZf jpg.bar.Z *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z<br><code>rar a jpg.rar *.jpg</code> //rar格式的压缩，需要先下载rar for linux<br><code>zip jpg.zip *.jpg</code> //zip格式的压缩，需要先下载zip for linux</p><h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p><code>tar -xvf file.tar</code> //解压 tar包<br><code>tar -xzvf file.tar.gz</code> //解压tar.gz<br><code>tar -xjvf file.tar.bz2</code>   //解压 tar.bz2<br><code>tar -xZvf file.tar.Z</code>   //解压tar.Z<br><code>unrar e file.rar</code> //解压rar<br><code>unzip file.zip</code> //解压zip</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> 命令 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux</title>
+      <link href="2020/12/30/linux/2020-12-30-linux/"/>
+      <url>2020/12/30/linux/2020-12-30-linux/</url>
+      
+        <content type="html"><![CDATA[<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="解压缩tar命令"><a href="#解压缩tar命令" class="headerlink" title="解压缩tar命令"></a><a href="/2020/12/30/linux/2020-12-30-linux-tar/">解压缩tar命令</a></h3>]]></content>
       
       
       <categories>
@@ -369,35 +398,6 @@
     
     
     <entry>
-      <title>Linux</title>
-      <link href="2020/12/30/linux/2020-12-30-linux/"/>
-      <url>2020/12/30/linux/2020-12-30-linux/</url>
-      
-        <content type="html"><![CDATA[<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="解压缩tar命令"><a href="#解压缩tar命令" class="headerlink" title="解压缩tar命令"></a><a href="/2020/12/30/linux/2020-12-30-linux-tar/">解压缩tar命令</a></h3>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 教程 </tag>
-            
-            <tag> Linux </tag>
-            
-            <tag> 命令 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Markdown教程</title>
       <link href="2020/12/29/2020-12-29-markdown/"/>
       <url>2020/12/29/2020-12-29-markdown/</url>
@@ -414,9 +414,9 @@
       
         <tags>
             
-            <tag> 教程 </tag>
-            
             <tag> Markdown </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       

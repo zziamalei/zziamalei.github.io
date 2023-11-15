@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Springboot实现软重启</title>
+      <link href="2023/11/15/springboot/2023-11-15-springboot-restart/"/>
+      <url>2023/11/15/springboot/2023-11-15-springboot-restart/</url>
+      
+        <content type="html"><![CDATA[<pre><code class="java">@SpringBootApplicationpublic class Application &#123;    private static ConfigurableApplicationContext context;    public static void main(String[] args) &#123;        context = SpringApplication.run(Application.class, args);    &#125;    public static void restart() &#123;        ApplicationArguments args = context.getBean(ApplicationArguments.class);        Thread thread = new Thread(() -&gt; &#123;            context.close();            context = SpringApplication.run(Application.class, args.getSourceArgs());        &#125;);        thread.setDaemon(false);        thread.start();    &#125;&#125;@RestControllerpublic class RestartController &#123;    @PostMapping(&quot;/restart&quot;)    public void restart() &#123;        Application.restart();    &#125;&#125;在这个例子中，我们创建了一个新的非守护线程来重新创建上下文，这样我们可以防止由close方法触发的JVM关闭我们的应用程序。然后，我们添加了一个REST端点，通过它可以触发重启。另外，Spring Boot Actuator的内置RestartEndpoint也可以用于重新启动应用程序1。但是，这需要在application.properties文件中启用内置的重启端点，并添加所需的Maven依赖项。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Springboot </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Springboot </tag>
+            
+            <tag> 重启 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>免费UI资源网站</title>
       <link href="2023/06/25/other/2023-06-25-free-ui-resource/"/>
       <url>2023/06/25/other/2023-06-25-free-ui-resource/</url>
@@ -253,35 +280,6 @@
     
     
     <entry>
-      <title>页面访问统计</title>
-      <link href="2021/01/05/html/2021-01-05-html-pv/"/>
-      <url>2021/01/05/html/2021-01-05-html-pv/</url>
-      
-        <content type="html"><![CDATA[<p>#目录</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在网站开发中，很多网页需要用到访问数量统计，访问人数统计。常用的有<a href="https://tongji.baidu.com/web/welcome/login">百度网站</a>统计,<br><a href="https://www.cnzz.com/o_index.php">CNZZ</a>(已合并到友孟)。这些平台都已经很稳定、成熟，按照其文档操作，即可获取网站详细的统计数据。<br>这里要与大家分享的是一个快速统计插件<a href="http://busuanzi.ibruce.info/">不蒜子</a>，好处就是不需要注册账号等复杂操作，坏处就是统计的内容较少</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="引入JS"><a href="#引入JS" class="headerlink" title="引入JS"></a>引入JS</h3><pre class="line-numbers language-none"><code class="language-none">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="安装标签"><a href="#安装标签" class="headerlink" title="安装标签"></a>安装标签</h3><ol><li>显示站点访问量<br>复制一下代码添加到你需要显示的位置，有两种算法可选：<br>a. pv的方式，单个用户连续点击n篇文章，记录n次访问量，即每次点击都记录一次  <pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_site_pv&quot;&gt;    本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>b. uv的方式，单个用户连续点击n篇文章，只记录1次访客数  <pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_site_uv&quot;&gt;  本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li><li>显示单页面访问量</li></ol><p>要显示每篇文章的访问量，复制以下代码添加到你需要显示的位置。</p><pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_page_pv&quot;&gt;  本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol start="3"><li>显示站点总访问量和单页面访问量</li></ol><p>上面两种标签代码都安装。</p><ol start="4"><li>只计数不显示</li></ol><p>只安装脚本代码，不安装标签代码。</p><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>极简模式</p><pre class="line-numbers language-none"><code class="language-none">本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>或者个性化一下：</p><pre class="line-numbers language-none"><code class="language-none">Total &lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt; views.您是xxx的第&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;个小伙伴&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt; Hits<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>文章参考<a href="http://ibruce.info/2015/04/04/busuanzi/#more">不蒜子统计</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Html </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 教程 </tag>
-            
-            <tag> Html </tag>
-            
-            <tag> 页面访问统计 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Html</title>
       <link href="2021/01/05/html/2021-01-05-html/"/>
       <url>2021/01/05/html/2021-01-05-html/</url>
@@ -303,6 +301,35 @@
             <tag> Html </tag>
             
             <tag> 网页 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>页面访问统计</title>
+      <link href="2021/01/05/html/2021-01-05-html-pv/"/>
+      <url>2021/01/05/html/2021-01-05-html-pv/</url>
+      
+        <content type="html"><![CDATA[<p>#目录</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在网站开发中，很多网页需要用到访问数量统计，访问人数统计。常用的有<a href="https://tongji.baidu.com/web/welcome/login">百度网站</a>统计,<br><a href="https://www.cnzz.com/o_index.php">CNZZ</a>(已合并到友孟)。这些平台都已经很稳定、成熟，按照其文档操作，即可获取网站详细的统计数据。<br>这里要与大家分享的是一个快速统计插件<a href="http://busuanzi.ibruce.info/">不蒜子</a>，好处就是不需要注册账号等复杂操作，坏处就是统计的内容较少</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="引入JS"><a href="#引入JS" class="headerlink" title="引入JS"></a>引入JS</h3><pre class="line-numbers language-none"><code class="language-none">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="安装标签"><a href="#安装标签" class="headerlink" title="安装标签"></a>安装标签</h3><ol><li>显示站点访问量<br>复制一下代码添加到你需要显示的位置，有两种算法可选：<br>a. pv的方式，单个用户连续点击n篇文章，记录n次访问量，即每次点击都记录一次  <pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_site_pv&quot;&gt;    本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>b. uv的方式，单个用户连续点击n篇文章，只记录1次访客数  <pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_site_uv&quot;&gt;  本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li><li>显示单页面访问量</li></ol><p>要显示每篇文章的访问量，复制以下代码添加到你需要显示的位置。</p><pre class="line-numbers language-none"><code class="language-none">&lt;span id&#x3D;&quot;busuanzi_container_page_pv&quot;&gt;  本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次&lt;&#x2F;span&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol start="3"><li>显示站点总访问量和单页面访问量</li></ol><p>上面两种标签代码都安装。</p><ol start="4"><li>只计数不显示</li></ol><p>只安装脚本代码，不安装标签代码。</p><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>极简模式</p><pre class="line-numbers language-none"><code class="language-none">本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>或者个性化一下：</p><pre class="line-numbers language-none"><code class="language-none">Total &lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt; views.您是xxx的第&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;个小伙伴&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt; Hits<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>文章参考<a href="http://ibruce.info/2015/04/04/busuanzi/#more">不蒜子统计</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Html </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> Html </tag>
+            
+            <tag> 页面访问统计 </tag>
             
         </tags>
       
